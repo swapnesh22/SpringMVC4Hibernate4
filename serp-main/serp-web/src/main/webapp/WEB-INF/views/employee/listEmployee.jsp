@@ -28,16 +28,6 @@
 </style>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
-    $(document).ready(function(){
-        $("#boxchecked").click(function (){
-            if ($("#boxchecked").prop("checked")){
-                $("#hidden").hide();
-            }else{
-                $("#hidden").show();
-            }              
-        });
-    });
-    
     function myFunction() {
     	  var input, filter, table, tr, td, i;
     	  input = document.getElementById("myInput");
@@ -60,8 +50,8 @@
 </head>
 <body>
 
-	<spring:url value="/addCustomer" var="addURL" />
-	<a href="${addURL }">Add New Customer</a>
+	<spring:url value="/employee/addEmployee" var="addURL" />
+	<a href="${addURL }">Add Employee</a>
 	<form:form>
 		<c:if test="${not empty exception}">
 			<font class="error"><c:out value="${exception.errCode}" /> <c:out
@@ -71,31 +61,33 @@
 		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 		<table width="50%" border=1 id="myTable">
 			<tr>
-				<th>Customer Id</th>
+				<th>Employee Id</th>
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Age</th>
 				<th>Gender</th>
 				<th>Address</th>
-				<th>Type</th>
+				<th>Email</th>
+				<th>Department</th>
 				<th colspan="2">Action</th>
 			</tr>
 
-			<c:forEach items="${listCustomer}" var="customer">
+			<c:forEach items="${listEmployee}" var="emp">
 				<tr>
-					<td>${customer.customernumber}</td>
-					<td>${customer.firstname}</td>
-					<td>${customer.lastname}</td>
-					<td>${customer.age}</td>
-					<td>${customer.gender}</td>
-					<td>${customer.address}</td>
-					<td>${customer.type}</td>
+					<td>${emp.employeeId}</td>
+					<td>${emp.firstname}</td>
+					<td>${emp.lastname}</td>
+					<td>${emp.age}</td>
+					<td>${emp.gender}</td>
+					<td>${emp.address}</td>
+					<td>${emp.email}</td>
+					<td>${emp.department.name}</td>
 
 					<td><spring:url
-							value="/updateCustomer/${customer.customernumber}"
+							value="/employee/updateEmployee/${emp.employeeId}"
 							var="updateURL" /> <a href="${updateURL }">Update</a></td>
 					<td><spring:url
-							value="/deleteCustomer/${customer.customernumber}"
+							value="/employee/deleteEmployee/${emp.employeeId}"
 							var="deleteURL" /> <a href="${deleteURL }">Delete</a></td>
 
 				</tr>
